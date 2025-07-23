@@ -12,7 +12,7 @@ Releaseからダウンロードできます。
 - Windows
 - なんらかのVR機器(Quest2, Quest3にて動作確認済み)
 
-Unity上で動作を確認するには以下のライブラリのインポートが必須です。 \
+Unity上で動作を確認するには以下のライブラリのインポートが必須です。
 - DOTween or DOTween Pro
 
   DOTween:https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676?locale=ja-JP
