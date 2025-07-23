@@ -23,5 +23,5 @@ Unity上で動作を確認するには以下のライブラリのインポート
 ShootingVR_Windowsがゲームの実行ファイルです。
 
 1. PCとVR機器を接続します。
-2. ダウンロードした実行ファイルの中にあるVR_Shooting_Onsen.exeを起動します。
+2. ダウンロードした実行ファイルの中にあるVRFireflyGuardians.exeを起動します。
 3. ゲームが始まります。
