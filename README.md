@@ -3,6 +3,9 @@
 過去に開発した[VRShooting_Game](https://github.com/VRUnityPJ/VRShootingGame_Public)を元に開発しています。  
 ソースコードや担当範囲などは Assets/Onogawa/Scripts から確認できます。 
 
+## プレイ映像
+Releaseからプレイ映像をダウンロードできます
+
 ## 実行ファイルのダウンロード
 Releaseからダウンロードできます。
 
