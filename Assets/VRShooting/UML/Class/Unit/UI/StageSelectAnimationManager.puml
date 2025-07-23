@@ -1,0 +1,15 @@
+@startuml
+package StageSelectPanelAnimationManager
+{
+    class StageSelectPanelAnimationManager
+    {
+        -[SerializeField] StageSelectButton[] normalStageButtons
+        -[SerializeField] StageSelectButton[] hardStageButtons
+        -[SerializeField] Image normalBackImage
+        -[SerializeField] Image hardBackImage
+        - Sequence showSequence
+        - void Start()
+        + void DoShowAnimation()
+    }
+}
+@enduml

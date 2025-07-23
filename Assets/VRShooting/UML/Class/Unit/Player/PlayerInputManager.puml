@@ -1,0 +1,27 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting
+{
+    package Player
+    {
+        class PlayerInputManager
+        {
+            +IObservable<Unit> OnTriggerShoot => _onTriggerShoot
+            -Subject<Unit> _onTriggerShoot 
+            +IObservable<Unit> OnChangeWeapon => _onChangeWeapon
+            -Subject<Unit> _onChangeWeapon
+            -MainInput _input
+            -void Start()
+        }
+        interface IPlayerInputManager
+        {
+            +IObservable<Unit> OnTriggerShoot
+            +IObservable<Unit> OnChangeWeapon
+        }
+        
+        PlayerInputManager ..|> IPlayerInputManager
+    }
+}
+
+@enduml

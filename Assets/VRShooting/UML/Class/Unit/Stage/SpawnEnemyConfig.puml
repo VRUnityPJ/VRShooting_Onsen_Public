@@ -1,0 +1,17 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package Stage
+{
+    class SpawnEnemyConfig
+    {
+        +EnemyObject enemyObject => _enemyObject
+        +int spawnNumber   => _number
+        +float secondsDuration    => _secondsDuration
+        -[SerializedField] EnemyObject _enemyObject
+        -[SerializedField] int _spawnNumber
+        -[SerializedField] float _secondsDuration 
+    }
+    note left : MonoBehaviourを継承しない。\nEnemySpawnSettingのインナークラス\nとして書き出すのもよい
+}
+@enduml

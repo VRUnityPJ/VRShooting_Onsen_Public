@@ -1,0 +1,32 @@
+@startuml
+
+package VRShooting
+{
+    package Ranking
+    {
+        class BoardUpdater
+        {
+            - void UpdateRanking()
+        }
+        
+        class BoardAnimationManager
+        {
+            + void DoUpdateAnimation
+        }
+        
+        class RankingStorage
+        {
+            - List<Record> nowRanking
+            + List<Record> GetNewRanking()
+        }
+        
+        class Record
+        {
+            - string name
+            - int score
+            - int rank
+        }
+    }
+}
+
+@enduml

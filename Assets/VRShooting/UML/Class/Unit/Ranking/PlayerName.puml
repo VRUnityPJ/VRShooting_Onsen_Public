@@ -1,0 +1,32 @@
+@startuml
+
+package VRShooting
+{
+    package Ranking
+    {  
+        class PlayerNameStorage
+        {
+            + {static} PlayerName nowPlayerName 
+            - PlayerName playerName
+            + Save()
+        }
+        
+        class PlayerName
+        {
+            - string name;
+            + PlayerName(string character)
+            + void Add(readonly PlayerName other)
+            + void Delete()
+        }
+        
+        class PointStorage
+        {
+            - int Point {get; set;}
+            + PointUp(int _getPoint) 
+        }
+    }
+    
+    
+}
+
+@enduml

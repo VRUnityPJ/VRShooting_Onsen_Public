@@ -1,0 +1,24 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting
+{
+    package Player
+    {
+        class PlayerShootTrigger
+        {
+            -IPlayerInputManager _input
+            -IPlayerGunHandler _gunHandler
+            -IGun _equippedGun
+            -void Start()
+            -void OnShoot()
+        }
+        interface IPlayerShootTrigger
+        {
+        }
+        
+        PlayerShootTrigger ..|> IPlayerShootTrigger
+    }
+}
+
+@enduml

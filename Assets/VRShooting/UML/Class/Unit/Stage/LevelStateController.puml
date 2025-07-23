@@ -1,0 +1,32 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package Stage
+{
+    class LevelStateController
+    {
+        +IObservable<Unit> OnStartNormalSpawnTime => _onStartNormalSpawnTime
+        +IObservable<Unit> OnEndNormalSpawnTime => _onEndNormalSpawnTime
+        +IObservable<Unit> OnStartBonusTime => _onStartBonusTime
+        +IObservable<Unit> OnEndBonusTime => _onEndBonusTime
+        -Subject<Unit> _onStartNormalSpawnTime
+        -Subject<Unit> _onEndNormalSpawnTime
+        -Subject<Unit> _onStartBonusTime
+        -Subject<Unit> _onEndBonusTime
+        -[SerializedField] float _stagePlayTime
+        -SpawnerLevelScale _levelSpawner
+        -void Start()
+        -void StartNormalSpawnTime()
+        -void StartBonusTime()
+    }
+    interface ILevelStateController
+    {
+        +IObservable<Unit> OnStartNormalSpawnTime
+        +IObservable<Unit> OnEndNormalSpawnTime
+        +IObservable<Unit> OnStartBonusTime
+        +IObservable<Unit> OnEndBonusTime
+    }
+    
+    LevelStateController ..|> ILevelStateController
+}
+@enduml

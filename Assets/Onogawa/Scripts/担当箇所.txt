@@ -1,0 +1,11 @@
+shimo_n(下道 然)の担当箇所
+プログラムを作成した箇所
+・Onogawa/Scripts/Audio/Data/AmbientSoundEffectData.cs
+・Onogawa/Scripts/Audio/Data/AmbientSoundEffectDataType.cs
+・Onogawa/Scripts/Audio/Player/*
+・Onogawa/Scripts/Enemy/Bat/*
+・Onogawa/Scripts/Stage/BGMPlayer.cs
+・Onogawa/Scripts/Stage/GameStarter.cs
+・Onogawa/Scripts/Stage/StageChanger.cs
+・Onogawa/Scripts/UI/InGame/TutorialUI/*
+・Onogawa/Scripts/Utility/InterfaceProvider.cs

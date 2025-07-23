@@ -1,0 +1,55 @@
+@startuml Onogawa
+namespace UI{
+
+    class ResultUIPresenter
+    class Stage1ResultUIViewer
+    class Stage2ResultUIViewer
+
+    class ResultViewModel<<struct>>{
+
+        + int TotalPoint
+        + int CurrentPoint
+        + int BounsPoint
+        + int SumFirefly
+        + int CuerentFirefly
+
+    }
+    interface IResultUIViewer{
+        + void View(ResultViewModel data)
+        + IObeservable<Unit> OnFinishedResult
+    }
+
+}
+
+namespace Point{
+
+    class PointHolder
+    class TotalPointHolder
+
+    interface IPointHolder{
+
+        + int Point { get; }
+        + int RestFireflyPoint { get; }
+
+        + void InitializePoint();
+        + void AddRestFireflyPoint(int fireflyCount);
+        + void AddPoint(int value);
+        + void SubPoint(int value);
+        + int GetTotalPoint();
+        + Rank GetRank();
+    }
+
+    enum Rank
+}
+
+    ResultUIPresenter --> IResultUIViewer
+    Stage1ResultUIViewer --|> IResultUIViewer
+    Stage2ResultUIViewer --|> IResultUIViewer
+    IResultUIViewer ..> ResultViewModel : uses
+    ResultUIPresenter --> IPointHolder
+
+    PointHolder --|> IPointHolder
+    IPointHolder -> Rank
+    PointHolder *-- TotalPointHolder
+
+@enduml

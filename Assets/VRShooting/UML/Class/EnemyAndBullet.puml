@@ -1,0 +1,118 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting4
+{
+    package Gun
+    {
+        enum BulletState
+        {
+            Normal
+            Reflection
+        }
+        class Bullet
+        {
+            -IBulletData bulletData
+            -Vector3 _moveDirection
+            -BulletState _bulletState
+            +void Spawn(Transform spawnPosition, Vector3 moveDirection, ref ObjectPool<IBullet> objectPool)
+            -void Start()
+            -void Update()
+            -void OnTriggerEnter(Collider other)
+        }
+        class BulletData
+        {
+            +float damage => _damage
+            -[SerializedField] float _damage
+        }
+        interface IBulletData
+        {
+            +float damage         
+        }
+        interface IBullet
+        {
+            +void Spawn(Transform spawnPosition)
+        }
+        
+        Bullet ..u|> IBullet
+        BulletData ..u|> IBulletData
+        
+        Bullet --> IBulletData
+    }
+    package Enemy
+    {
+        enum EnemyState 
+        {
+            Idle
+            Move
+            Dead
+        }
+        class EnemyHealth
+        {
+            +static IObservable<float> OnDestroyEnemy => _onDestroyEnemy
+            -static Subject<float> _onDestroyEnemy
+            +IReadReactiveProperty<float> OnChangeHealth => _health
+            -[SerializedField] ReactiveProperty<float> _health
+            -IEnemyStateController _enemyStateController
+            +void TakeDamage(float damage, BulletState bulletState)
+            -void Start()
+        }
+        class EnemyMovement
+        {
+            -IEnemyStateController _enemyStateController
+            +void Move()
+            -void Start()
+        }
+        class EnemyStateController
+        {
+            +event Action OnEnterIdle
+            +event Action OnExitIdle
+            +event Action<float> OnUpdateIdle
+            +event Action OnEnterMove
+            +event Action OnExitMove
+            +event Action<float> OnUpdateMove
+            +event Action OnEnterDead
+            +event Action OnExitDead
+            +event Action<float> OnUpdateDead
+            +StateMachine<EnemyState, EnemyStateTrigger> enemyStateMachine => _enemyStateMachine
+            -StateMachine<EnemyState, EnemyStateTrigger> _enemyStateMachine
+        }
+        class StateMachine<TState, TTrigger>
+        interface IDamageable
+        {
+            +void TakeDamage(float damage, BulletState bulletState)
+        }
+        interface IEnemyHealth
+        {
+            +IReadReactiveProperty<float> OnChangeHealth => _health
+        }
+        interface IEnemyMovement
+        {
+            +void Move()
+        }
+        interface IEnemyStateController
+        {
+            +event Action OnEnterIdle
+            +event Action OnExitIdle
+            +event Action<float> OnUpdateIdle
+            +event Action OnEnterMove
+            +event Action OnExitMove
+            +event Action<float> OnUpdateMove
+            +event Action OnEnterDead
+            +event Action OnExitDead
+            +event Action<float> OnUpdateDead
+        }
+        
+        EnemyHealth ..|> IDamageable
+        EnemyHealth ..|> IEnemyHealth
+        EnemyMovement ..|> IEnemyMovement
+        EnemyStateController ..|> IEnemyStateController
+        
+        EnemyStateController ..left> StateMachine
+        EnemyMovement --u> IEnemyStateController
+        EnemyHealth   --u> IEnemyStateController
+    }
+    
+    Bullet ---> IDamageable
+}
+@enduml

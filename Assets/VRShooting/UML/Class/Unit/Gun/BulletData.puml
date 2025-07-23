@@ -1,0 +1,30 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting
+{
+    package Gun
+    {
+        class BulletData
+        {
+            +float lifeTime => _lifeTime
+            +float speed => _speed
+            +int maxReflection => maxReflection
+            -[SerializedField] float _lifeTime
+            -[SerializedField] float _speed
+            -[SerializedField] int _maxReflection
+            etc..
+        }
+        interface IBulletData
+        {
+            +float lifeTime
+            +float speed
+            +int maxReflection
+            etc..            
+        }
+        
+        BulletData ..|> IBulletData
+    }
+}
+
+@enduml

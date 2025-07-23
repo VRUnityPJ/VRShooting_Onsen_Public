@@ -1,0 +1,28 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package Enemy
+{
+    class EnemyHealth
+    {
+        +static IObservable<float> OnDestroyEnemy => _onDestroyEnemy
+        -static Subject<float> _onDestroyEnemy
+        +IReadReactiveProperty<float> OnChangeHealth => _health
+        -[SerializedField] ReactiveProperty<float> _health
+        -IEnemyStateController _enemyStateController
+        -void Start()
+        +void TakeDamage(float damage, BulletState bulletState)
+    }
+    interface IEnemyHealth
+    {
+        +IReadReactiveProperty<float> OnChangeHealth => _health
+    }
+    interface IDamageable
+    {
+        +void TakeDamage(float damage, BulletState bulletState)
+    }
+    
+    EnemyHealth ..|> IEnemyHealth
+    EnemyHealth ..|> IDamageable
+}
+@enduml

@@ -1,0 +1,19 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package Enemy
+{
+    class EnemyObject
+    {
+        +void SpawnInitialize()
+    }
+    
+    interface IEnemyObject
+    {
+        +void SpawnInitialize()
+    }
+    
+    EnemyObject ..u|> IEnemyObject
+}
+
+@enduml

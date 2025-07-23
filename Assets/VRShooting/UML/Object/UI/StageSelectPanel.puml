@@ -1,0 +1,27 @@
+@startuml
+package StageSelectPanel
+{
+    package StageSelectText{}
+    
+    package StageSelectPanelAnimationManager
+    {
+        
+    }
+    
+    package NormalBackImage
+    {
+        
+    }
+    
+    package HardBackImage
+    {
+        
+    }
+    
+    package StageSelectButton{}
+    
+    StageSelectPanelAnimationManager "1"--"1"NormalBackImage
+    StageSelectPanelAnimationManager "1"--"1"HardBackImage
+    StageSelectPanelAnimationManager "1"--"n"StageSelectButton
+}
+@enduml

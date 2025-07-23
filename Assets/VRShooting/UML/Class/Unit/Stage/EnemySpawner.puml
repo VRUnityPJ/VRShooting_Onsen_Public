@@ -1,0 +1,13 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package Stage
+{
+    class EnemySpawner
+    {
+        -[SerializedField] EnemySpawnSetting _spawnSetting
+        -UniTask Spawn(CancellationToken token)
+    }
+}
+
+@enduml

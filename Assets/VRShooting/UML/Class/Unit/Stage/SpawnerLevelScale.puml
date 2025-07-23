@@ -1,0 +1,22 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package Stage
+{
+    class SpawnerLevelScale
+    {
+        -[SerializedField] List<EnemySpawner> _enemySpawnerList
+        -CancellationToken _token
+        +UniTask StartSpawn(CancellationToken token)
+        +UniTask StartBonusTime(CancellationToken token)
+    }
+    interface ISpawnLevelScale
+    {
+        +UniTask StartSpawn(CancellationToken token)
+        +UniTask StartBonusTime(CancellationToken token)
+    }
+    
+    SpawnerLevelScale ..|> ISpawnLevelScale
+}
+
+@enduml

@@ -1,0 +1,31 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting
+{
+    package Player
+    {
+        class PlayerGunHandler
+        {
+            +ReadOnlyReactiveProperty<GunVariant> OnChangeGunVariant => _onChangeGunVariant
+            -ReactiveProperty<GunVariant> _onChangeGunVariant
+            +ReadOnlyReactiveProperty<IGun> OnChangeGun => _currentGun
+            -ReactiveProperty<IGun> _currentGun
+            -IPlayerHandData _handData
+            +IGun GetEquippedGun()
+            +void EquipGun(IGun equippedGun)
+            -void Start()
+        }
+        interface IPlayerGunHandler
+        {
+            +ReadOnlyReactiveProperty<GunVariant> OnChangeGunVariant
+            +ReadOnlyReactiveProperty<IGun> OnChangeGun
+            +IGun GetEquippedGun()
+            +void EquipGun(IGun equippedGun)
+        }
+        
+        PlayerGunHandler ..|> IPlayerGunHandler
+    }
+}
+
+@enduml

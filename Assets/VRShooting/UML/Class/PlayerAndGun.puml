@@ -1,0 +1,185 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting
+{
+    package Player
+    {
+        enum HandType
+        {
+            Left,
+            Right,
+        }
+        class PlayerHandData
+        {
+            +ReadOnlyReactiveProperty OnChangeHandType => _handType
+            -ReactiveProperty<HandType> _handType
+            -[SerializedField] HandType _initialHandType
+            -[SerializedField] Transform _rightHandPosition
+            -[SerializedField] Transform _leftHandPosition
+            +void SetHandType(HandType handType)
+            +Transform GetHandPosition()
+        }
+        class PlayerShootTrigger
+        {
+            -IPlayerInputManager _input
+            -IPlayerGunHandler _gunHandler
+            -IGun _equippedGun
+            -void Start()
+            -void OnShoot()
+        }
+        class PlayerInputManager
+        {
+            +IObservable<Unit> OnTriggerShoot
+            -Subject<Unit> _onTriggerShoot 
+            -MainInput _input
+            -void Start()
+        }
+        class PlayerGunHandler
+        {
+            +ReadOnlyReactiveProperty<GunVariant> OnChangeGunVariant => _onChangeGunVariant
+            -ReactiveProperty<GunVariant> _onChangeGunVariant
+            +ReadOnlyReactiveProperty<IGun> OnChangeGun => _currentGun
+            -ReactiveProperty<IGun> _currentGun
+            -IPlayerHandData _handData
+            +IGun GetEquippedGun()
+            +void EquipGun(IGun equippedGun)
+            -void Start()
+        }
+        class PlayerEquippedGunSwitcher
+        {
+            -[SerializedField] GunVariant _initialGun
+            -[SerializedField] List<GunVariant> _equipGunMap
+            -Dictionary<GunVariant, IGun> _gunStrategyData
+            -IPlayerGunHandler _gunHandler
+            -void Start()
+            -void InitializedStrategyData()
+            +void AddGun(GunVariant gunName, IGun gunInstance)
+        }
+        interface IPlayerHandData
+        {
+            +ReadOnlyReactiveProperty OnChangeHandType
+            +void SetHandType(HandType handType)
+            +Transform GetHandPosition()   
+        }
+        interface IPlayerShootTrigger
+        {
+        }
+        interface IPlayerInputManager
+        {
+            +IObservable<Unit> OnTriggerShoot
+            +IObservable<Unit> OnChangeWeapon
+        }
+        interface IPlayerGunHandler
+        {
+            +ReadOnlyReactiveProperty<GunVariant> OnChangeGunVariant
+            +ReadOnlyReactiveProperty<IGun> OnChangeGun
+            +IGun GetEquippedGun()
+            +void EquipGun(IGun equippedGun)
+        }
+        interface IPlayerEquippedGunSwitcher
+        {
+            +void AddGun(GunVariant gunName, IGun gunInstance)
+        }
+        
+        PlayerInputManager ..|> IPlayerInputManager
+        PlayerShootTrigger ..|> IPlayerShootTrigger
+        PlayerGunHandler   ..u|> IPlayerGunHandler
+        PlayerHandData         ..|> IPlayerHandData
+        PlayerEquippedGunSwitcher ..u|> IPlayerEquippedGunSwitcher
+        PlayerShootTrigger --u> IPlayerInputManager
+        PlayerShootTrigger -->  IPlayerGunHandler    
+        PlayerEquippedGunSwitcher --> IPlayerGunHandler
+        PlayerEquippedGunSwitcher --left> IPlayerInputManager
+        PlayerGunHandler --right> IPlayerHandData
+    }
+    package Gun
+    {
+        enum GunVariant
+        {
+            NormalGun,
+            ExplosionGun,
+            etc..
+        }
+        class Gun
+        {
+            -[SerializedField] Transform _muzzle
+            -ObjectPool<IBullet> _bulletPool
+            -IGunData _gunData
+            +void Shoot()
+            +void Equipped(Transform handPosition)
+            +void RemoveEquipment()
+            -void Start()
+            -void CreateBulletObjectPool()
+            -void ReleaseBulletObjectPool()
+        }
+        class GunData
+        {
+            +IBullet bulletObj => _bulletObj
+            -[SerializedField] Bullet _bulletObj
+            +float fireRate => _fireRate
+            -[SerializedField] float _fireRate
+            etc..
+            +void ChangeFireRate(float fireRate)
+            etc..()
+        }
+        class BulletData
+        {
+            +float lifeTime => _lifeTime
+            +float speed => _speed
+            +int maxReflection => maxReflection
+            -[SerializedField] float _lifeTime
+            -[SerializedField] float _speed
+            -[SerializedField] int _maxReflection
+            etc..
+        }
+        class Bullet
+        {
+            -IBulletData bulletData
+            -Vector3 _moveDirection
+            +void Spawn(Transform spawnPosition, Vector3 moveDirection, ref ObjectPool<IBullet> objectPool)
+            -void Start()
+            -void Update()
+            -void OnTriggerEnter(Collider other)
+        }
+        interface IGun
+        {
+            +void Shoot()
+            +void Equipped(Transform handPosition)
+            +void RemoveEquipment()
+        }
+        interface IGunData
+        {
+            +IBullet bulletObj => _bulletObj
+            +float fireRate => _fireRate
+            etc..
+            +void ChangeFireRate(float fireRate)
+            etc..()
+        }
+        interface IBulletData
+        {
+            +float lifeTime => _lifeTime
+            +float speed => _speed
+            +int maxReflection => maxReflection
+            etc..            
+        }
+        interface IBullet
+        {
+            +void Spawn(Transform spawnPosition)
+        }
+        
+'        Implement interface
+        Gun     ..up|> IGun
+        GunData ..up|> IGunData
+        Bullet     ..up|> IBullet
+        BulletData ..u|> IBulletData
+        
+        Gun     --> IGunData
+        Gun     --> IBullet
+        Bullet  --> IBulletData
+    }
+    
+    PlayerGunHandler --left> IGun
+}
+
+@enduml

@@ -1,0 +1,14 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package Stage
+{
+    class EnemySpawnSetting
+    {
+        +List<SpawnEnemyConfig> enemyList => _enemyList
+        -[SerializedField] List<SpawnEnemyConfig> _enemyList
+    }
+    note left : Scriptable Objectとして定義する。\n不用意に編集されないように読み取り専用で中身を公開する。
+}
+
+@enduml

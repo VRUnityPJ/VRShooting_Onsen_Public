@@ -1,0 +1,33 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting
+{
+    package Player
+    {
+        enum HandType
+        {
+            Left,
+            Right,
+        }
+        class PlayerHandData
+        {
+            +ReadOnlyReactiveProperty OnChangeHandType => _handType
+            -ReactiveProperty<HandType> _handType
+            -[SerializedField] HandType _initialHandType
+            -[SerializedField] Transform _rightHandPosition
+            -[SerializedField] Transform _leftHandPosition
+            +void SetHandType(HandType handType)
+            +Transform GetHandPosition()
+        }
+        interface IPlayerHandData
+        {
+            +ReadOnlyReactiveProperty OnChangeHandType
+            +void SetHandType(HandType handType)
+            +Transform GetHandPosition()   
+        }
+        
+        PlayerHandData ..|> IPlayerHandData
+    }
+}
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+title KeyBoardオブジェクトの子オブジェクトの相関図
+package KeyBoard_Object
+{
+    package KeyBoardAnimationManager{}
+    package PlayerNameInputField{}
+     
+    package DeleteButton{}
+    package EnterButton{}
+    
+    
+    package KeyButton{}
+    package PlayerNameStorage{}
+    
+    PlayerNameInputField "1"--"1  " PlayerNameStorage
+    PlayerNameStorage "1   "-- "                  26" KeyButton
+    PlayerNameStorage "1"-- "1  " DeleteButton
+    PlayerNameStorage "1"-- "1" EnterButton
+}
+@enduml

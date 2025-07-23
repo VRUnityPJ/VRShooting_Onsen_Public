@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb89adc796e4591b61ce161362af626, type: 3}
+  m_Name: ProtoType_GunDataBase
+  m_EditorClassIdentifier: 
+  _gunVariantDataBase:
+  - _variantKey: 1
+    _gunObject: {fileID: 575991370072642230, guid: b689831285e02c84e8bb23ebc86c3e7c,
+      type: 3}
+  - _variantKey: 0
+    _gunObject: {fileID: 6483260392215770817, guid: 4fd64674604611f4980addc1ced1065e,
+      type: 3}
+  - _variantKey: 3
+    _gunObject: {fileID: -4672462891948221347, guid: d512ee9d4221c9645bfaf35455dc0bd3,
+      type: 3}
+  - _variantKey: 5
+    _gunObject: {fileID: 621151076688634083, guid: af3a5672f92f2d0409b3757310985eac,
+      type: 3}
+  - _variantKey: 2
+    _gunObject: {fileID: 7883365700125629423, guid: 919d0ca15cbf67f488ca1f29c00b237f,
+      type: 3}

@@ -1,0 +1,16 @@
+@startuml
+package KeyBoardAnimationManager
+{
+    class KeyBoardAnimationManager
+    {
+        - KeyButton[] ketButtons
+        - [SerializeField] EnterButton enterButton
+        - [SerializeField] DeleteButton deleteButton
+        - [SerializeField] Image inputField
+        - Sequence FadeInSequence
+        - void Start()
+        - void DoFadeInAnimation()
+        + void TurnOffKeyBoard()
+    }
+}
+@enduml

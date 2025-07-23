@@ -1,0 +1,70 @@
+@startuml
+
+package VRShooting
+{
+    package UI
+    {   
+        class VRButton
+        {
+            - [SerializeField] AudioClip clickedSE
+            - Sequence clickedSequence 
+            - void Start()
+            + void PlayClickedSE() /*PointerUp*/
+            + void DoPointerDownAnimation() /*PointerDown*/
+            + void DoPointerUpAnimation() /*PointerUp*/
+            + void DoPointerExitAnimation()
+        }
+        
+        class KeyBoardButton
+        {
+           # [SerializeField] Color pointedColor
+           # [SerializeField] Color clickedColor
+           # [SerializeField] Color defaultColor
+           - Image frame
+           # TextMeshProGUI text
+           - void Start()
+           + void ChangeColorToPointed() 
+           + void ChangeColorToClicked()
+           + void ChangeColorToDefault() 
+           + void DoFadeIn()
+           + virtual void Clicked()
+        }
+        
+        class StageSelectButton
+        {
+           - [SerializeField] Color pointedColor
+           - [SerializeField] Color defaultColor
+           - Image frame 
+           - void Start()
+           + void ChangeColorToPointed() 
+           + void ChangeColorToDefault()  
+           + DoFadeIn()
+           + void Clicked()
+        }
+        
+        class KeyButton
+        {
+            - [SerializeField] string myChar
+            - void Start()
+           + override void Clicked()
+        }
+        
+        class EnterButton
+        {
+            + override void Clicked()
+        }
+        
+        class DeleteButton
+        {
+           + override void Clicked()
+        } 
+        
+        VRButton <|-- StageSelectButton
+        VRButton <|-- KeyBoardButton
+        KeyBoardButton <|-- KeyButton
+        KeyBoardButton <|-- DeleteButton
+        KeyBoardButton <|-- EnterButton
+        
+    }
+}
+@enduml

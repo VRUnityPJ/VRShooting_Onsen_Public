@@ -1,0 +1,94 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+package VRShooting
+{
+    package Enemy
+    {
+        class EnemyObject
+        {
+            +void SpawnInitialize()
+        }
+        
+        interface IEnemyObject
+        {
+            +void SpawnInitialize()
+        }
+        
+        EnemyObject ..u|> IEnemyObject
+    }
+    
+    package Stage
+    {
+        class LevelStateController
+        {
+            +IObservable<Unit> OnStartNormalSpawnTime => _onStartNormalSpawnTime
+            +IObservable<Unit> OnEndNormalSpawnTime => _onEndNormalSpawnTime
+            +IObservable<Unit> OnStartBonusTime => _onStartBonusTime
+            +IObservable<Unit> OnEndBonusTime => _onEndBonusTime
+            -Subject<Unit> _onStartNormalSpawnTime
+            -Subject<Unit> _onEndNormalSpawnTime
+            -Subject<Unit> _onStartBonusTime
+            -Subject<Unit> _onEndBonusTime
+            -[SerializedField] float _stagePlayTime
+            -SpawnerLevelScale _levelSpawner
+            -void Start()
+            -void StartNormalSpawnTime()
+            -void StartBonusTime()
+        }
+        class SpawnerLevelScale
+        {
+            -[SerializedField] List<EnemySpawner> _enemySpawnerList
+            -CancellationToken _token
+            +UniTask StartSpawn(CancellationToken token)
+            +UniTask StartBonusTime(CancellationToken token)
+        }
+        class EnemySpawner
+        {
+            -[SerializedField] EnemySpawnSetting _spawnSetting
+            -UniTask Spawn(CancellationToken token)
+        }
+        class EnemySpawnSetting
+        {
+            +List<SpawnEnemyConfig> enemyList => _enemyList
+            -[SerializedField] List<SpawnEnemyConfig> _enemyList
+        }
+        note left : Scriptable Objectとして定義する。\n不用意に編集されないように読み取り専用で中身を公開する。
+        
+        class SpawnEnemyConfig
+        {
+            +EnemyObject enemyObject => _enemyObject
+            +int spawnNumber   => _number
+            +float duration    => _duration
+            -[SerializedField] EnemyObject _enemyObject
+            -[SerializedField] int _spawnNumber
+            -[SerializedField] float _secondsDuration 
+        }
+        note left : MonoBehaviourを継承しない。\nEnemySpawnSettingのインナークラス\nとして書き出すのもよい
+        
+        interface ISpawnLevelScale
+        {
+            +UniTask StartSpawn(CancellationToken token)
+            +UniTask StartBonusTime(CancellationToken token)
+        }
+        interface ILevelStateController
+        {
+            +IObservable<Unit> OnStartNormalSpawnTime
+            +IObservable<Unit> OnEndNormalSpawnTime
+            +IObservable<Unit> OnStartBonusTime
+            +IObservable<Unit> OnEndBonusTime
+        }
+        
+        SpawnerLevelScale ..u|> ISpawnLevelScale
+        LevelStateController ..u|> ILevelStateController
+        
+        SpawnerLevelScale *-- EnemySpawner
+        EnemySpawnSetting "n" *-- SpawnEnemyConfig
+        EnemySpawner --> EnemySpawnSetting
+        LevelStateController --> SpawnerLevelScale
+    }
+    
+    SpawnEnemyConfig --right> EnemyObject
+}
+
+@enduml
