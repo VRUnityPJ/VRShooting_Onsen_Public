@@ -23,7 +23,7 @@ Unity上で動作を確認するには以下のライブラリのインポート
   DOTween Pro:https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416
 
 ## ゲームの実行方法
-ShootingVR_Windowsがゲームの実行ファイルです。
+VRFireflyGuardiansがゲームの実行ファイルです。
 
 1. PCとVR機器を接続します。
 2. ダウンロードした実行ファイルの中にあるVRFireflyGuardians.exeを起動します。
