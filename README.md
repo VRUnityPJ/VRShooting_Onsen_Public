@@ -1,8 +1,7 @@
 # VRShooting_Onsen_Public
 第45回小野川温泉ほたるまつりにて出展したVRShooting_Onsenのプログラムなどを公開するためのリポジトリです。  
 過去に開発した[VRShooting_Game](https://github.com/VRUnityPJ/VRShootingGame_Public)を元に開発しています。  
-ソースコードや担当範囲などは Assets/Onogawa/Scripts から確認できます。  
-VRShooting_Gameのソースコードや担当範囲などはAssets/VRShooting/Scriptsから確認できます。
+ソースコードや担当範囲などは Assets/Onogawa/Scripts から確認できます。 
 
 ## 実行ファイルのダウンロード
 Releaseからダウンロードできます。
